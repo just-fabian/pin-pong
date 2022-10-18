@@ -41,19 +41,19 @@ public class BoardController implements Initializable {
         @Override
         public void handle(long now) {
             int movementVariable = 2;
-            if (wPressed.get())
+            if (wPressed.get() && paletteOne.getLayoutY() > 5)
                 paletteOne.setLayoutY(paletteOne.getLayoutY() - movementVariable);
 
 
-            if (sPressed.get())
+            if (sPressed.get() && paletteOne.getLayoutY() < 445)
                 paletteOne.setLayoutY(paletteOne.getLayoutY() + movementVariable);
 
 
-            if (upPressed.get())
+            if (upPressed.get() && paletteTwo.getLayoutY() > 5)
                 paletteTwo.setLayoutY(paletteTwo.getLayoutY() - movementVariable);
 
 
-            if (downPressed.get())
+            if (downPressed.get() && paletteTwo.getLayoutY() < 445)
                 paletteTwo.setLayoutY(paletteTwo.getLayoutY() + movementVariable);
 
         }
