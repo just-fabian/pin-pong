@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PingPongJfx" />
+        <module name="pin-pong" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="pin-pong" target="11" />
       <module name="PingPongJfx" target="11" />
     </bytecodeTargetLevel>
   </component>
