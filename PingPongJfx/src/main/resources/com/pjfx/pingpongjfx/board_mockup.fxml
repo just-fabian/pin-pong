@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pjfx.pingpongjfx.controller.BoardController">
    <children>
@@ -32,21 +31,10 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="18.0" layoutX="518.0" layoutY="413.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="18.0" layoutX="518.0" layoutY="387.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="18.0" layoutX="518.0" layoutY="514.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
-            <Circle fx:id="ball" fill="WHITE" layoutX="933.0" layoutY="67.0" radius="14.0" stroke="#0d0d0d" strokeType="INSIDE" />
-            <Label fx:id="counterPlayTwo" alignment="CENTER" layoutX="657.0" layoutY="25.0" prefHeight="40.0" prefWidth="36.0" text="0" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="37.0" />
-               </font>
-            </Label>
-            <Label fx:id="counterPlayerOne" alignment="CENTER" layoutX="355.0" layoutY="25.0" prefHeight="40.0" prefWidth="36.0" text="0" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="37.0" />
-               </font>
-            </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="18.0" layoutX="518.0" layoutY="542.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
             <Rectangle fx:id="paletteOne" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="113.0" layoutX="34.0" layoutY="426.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
             <Rectangle fx:id="paletteTwo" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="113.0" layoutX="971.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
-            <Button layoutX="424.0" layoutY="28.0" mnemonicParsing="false" onAction="#start" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: black;" text="Press Here ToStart Palettes" textFill="WHITE">
+            <Button layoutX="424.0" layoutY="28.0" mnemonicParsing="false" onAction="#start" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: black;" text="Press Here To Restart" textFill="WHITE">
                <effect>
                   <InnerShadow>
                      <color>
@@ -54,6 +42,9 @@
                      </color>
                   </InnerShadow>
                </effect></Button>
+            <Circle fx:id="ball" fill="DODGERBLUE" layoutX="550.0" layoutY="91.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+            <TextField fx:id="counterPlayerOne" layoutX="343.0" layoutY="16.0" prefHeight="39.0" prefWidth="62.0"  />
+            <TextField fx:id="counterPlayTwo" layoutX="646.0" layoutY="16.0" prefHeight="39.0" prefWidth="62.0" />
          </children>
       </AnchorPane>
    </children>
