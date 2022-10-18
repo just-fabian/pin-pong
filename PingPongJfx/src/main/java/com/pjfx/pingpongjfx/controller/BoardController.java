@@ -1,123 +1,130 @@
 package com.pjfx.pingpongjfx.controller;
 
+import javafx.animation.AnimationTimer;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-/**
- * This class manage the controller view.
- * <p>
- * Instantiate all the elements of the board to be able to control them.
- * </p>
- * @author TheCodeBears
- */
-public class BoardController {
+public class BoardController implements Initializable {
 
     @FXML
     private Circle ball;
 
     @FXML
-    private Label counterPlayTwo;
+    private Label counterPlayTwo, counterPlayerOne;
 
     @FXML
-    private Label counterPlayerOne;
+    private Rectangle paletteOne, paletteTwo;
 
     @FXML
-    private Rectangle paletteOne;
+    private AnchorPane anchorPane;
+
+    private final BooleanProperty wPressed = new SimpleBooleanProperty();
+    private final BooleanProperty upPressed = new SimpleBooleanProperty();
+    private final BooleanProperty sPressed = new SimpleBooleanProperty();
+    private final BooleanProperty downPressed = new SimpleBooleanProperty();
+
+    private final BooleanBinding keyPressed = wPressed.or(upPressed).or(sPressed).or(downPressed);
+
+    AnimationTimer timer = new AnimationTimer() {
+
+        @Override
+        public void handle(long now) {
+            int movementVariable = 2;
+            if (wPressed.get() && paletteOne.getLayoutY() > 5)
+                paletteOne.setLayoutY(paletteOne.getLayoutY() - movementVariable);
+
+
+            if (sPressed.get() && paletteOne.getLayoutY() < 445)
+                paletteOne.setLayoutY(paletteOne.getLayoutY() + movementVariable);
+
+
+            if (upPressed.get() && paletteTwo.getLayoutY() > 5)
+                paletteTwo.setLayoutY(paletteTwo.getLayoutY() - movementVariable);
+
+
+            if (downPressed.get() && paletteTwo.getLayoutY() < 445)
+                paletteTwo.setLayoutY(paletteTwo.getLayoutY() + movementVariable);
+
+        }
+    };
 
     @FXML
-    private Rectangle paletteTwo;
-
-    /**
-     * This is a getter method to ball.
-     *
-     * @return Return the current ball.
-     */
-    public Circle getBall() {
-        return ball;
+    public void start() {
+        System.out.println("ddd");
+        paletteOne.setLayoutY(200);
+        paletteOne.setLayoutX(41);
+        paletteTwo.setLayoutY(200);
+        paletteTwo.setLayoutX(971);
     }
 
     /**
-     * This is a setter method to ball.
-     *
-     * @param ball Receive a new Circle.
+     * This class manage the controller view.
+     * <p>
+     * Instantiate all the elements of the board to be able to control them.
+     * </p>
+     * @author TheCodeBears
      */
-    public void setBall(Circle ball) {
-        this.ball = ball;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        movementSetup();
+
+        keyPressed.addListener(((ObservableValue, aBoolean, t1) -> {
+            if (!aBoolean)
+                timer.start();
+
+            else
+                timer.stop();
+        }));
     }
 
-    /**
-     * This is a getter method to player two counter label.
-     *
-     * @return Return the Label with the counter.
-     */
-    public Label getCounterPlayTwo() {
-        return counterPlayTwo;
-    }
+    private void movementSetup() {
+        anchorPane.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.W)
+                wPressed.set(true);
 
-    /**
-     * This is a setter method to player two counter label.
-     *
-     * @param counterPlayTwo Receive a new label.
-     */
-    public void setCounterPlayTwo(Label counterPlayTwo) {
-        this.counterPlayTwo = counterPlayTwo;
-    }
 
-    /**
-     * This method return the counter of the playerOne.
-     *
-     * for to know the score of the player one.
-     * @return
-     */
-    public Label getCounterPlayerOne() {
-        return counterPlayerOne;
-    }
+            if (e.getCode() == KeyCode.S)
+                sPressed.set(true);
 
-    /**
-     * This to change the counter of the player One.
-     *
-     * @param counterPlayerOne
-     */
-    public void setCounterPlayerOne(Label counterPlayerOne) {
-        this.counterPlayerOne = counterPlayerOne;
-    }
 
-    /**
-     * this method returns the paletterOne Image.
-     *
-     * @return
-     */
-    public Rectangle getPaletteOne() {
-        return paletteOne;
-    }
+            if (e.getCode() == KeyCode.P)
+                upPressed.set(true);
 
-    /**
-     * This method is for to change the position of the palette One image.
-     *
-     * @param paletteOne
-     */
-    public void setPaletteOne(Rectangle paletteOne) {
-        this.paletteOne = paletteOne;
-    }
 
-    /**
-     * This is a getter method to palette two.
-     *
-     * @return Return the rectangle.
-     */
-    public Rectangle getPaletteTwo() {
-        return paletteTwo;
-    }
+            if (e.getCode() == KeyCode.L)
+                downPressed.set(true);
 
-    /**
-     * This is a setter method to palette two.
-     *
-     * @param paletteTwo Receive a new rectangle.
-     */
-    public void setPaletteTwo(Rectangle paletteTwo) {
-        this.paletteTwo = paletteTwo;
+        });
+
+        anchorPane.setOnKeyReleased(e ->{
+            if (e.getCode() == KeyCode.W) {
+                wPressed.set(false);
+
+            }
+            if (e.getCode() == KeyCode.S) {
+                sPressed.set(false);
+
+            }
+
+            if (e.getCode() == KeyCode.P) {
+                upPressed.set(false);
+
+            }
+            if (e.getCode() == KeyCode.L) {
+                downPressed.set(false);
+
+            }
+        });
     }
 }
